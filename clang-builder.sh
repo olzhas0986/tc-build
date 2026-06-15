@@ -73,11 +73,6 @@ fi
 #     AddBolt
 # fi
 
-if [[ -z "${GIT_SECRET}" ]] || [[ -z "${BOT_TOKEN}" ]];then
-    msg "something is missing, aborting . . ."
-    exit
-fi
-
 wget -q https://raw.githubusercontent.com/ZyCromerZ/Clang/main/Clang-$EsOne-lastbuild.txt -O result.txt || echo 'blank' > result.txt
 wget -q https://raw.githubusercontent.com/ZyCromerZ/Clang/main/Clang-$EsOne-commit.txt -O result-b.txt || echo 'blank' > result-b.txt
 wget -q https://raw.githubusercontent.com/ZyCromerZ/binutils-maker/main/result/binutils-master.date -O result-c.txt || echo 'blank' > result-c.txt
