@@ -15,14 +15,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Set up CCache
-      uses: hendrikmuhs/ccache-action@v1.2
-      with:
-        key: ${{ runner.os }}-toolchain-${{ github.sha }}
-        restore-keys: |
-          ${{ runner.os }}-toolchain-
-        max-size: 10G
-
     - name: Install dependencies
       run: |
         sudo apt-get update
@@ -47,4 +39,10 @@ jobs:
       run: |
         export USE_CCACHE=1
         bash ci.sh kernel
-        
+
+    - name: Upload Finished Toolchain
+      uses: actions/upload-artifact@v4
+      with:
+        name: munch-llvm-rust-toolchain
+        path: install/
+        if-no-files-found: error
