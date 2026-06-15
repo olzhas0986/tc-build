@@ -1115,8 +1115,24 @@ def build_cmake_defines(args, dirs, env_vars, stage):
     # Removes system dependency on terminfo to keep the dynamic library dependencies slim
     defines['LLVM_ENABLE_TERMINFO'] = 'OFF'
 
-    return defines
+    # Removes system dependency on terminfo to keep the dynamic library dependencies slim
+    defines['LLVM_ENABLE_TERMINFO'] = 'OFF'
 
+    if 'LLVM_ENABLE_PROJECTS' in defines:
+        projects = defines['LLVM_ENABLE_PROJECTS'].split(';')
+        if 'openmp' in projects:
+            projects.remove('openmp')
+            defines['LLVM_ENABLE_PROJECTS'] = ';'.join(projects)
+            
+            if 'LLVM_ENABLE_RUNTIMES' in defines and defines['LLVM_ENABLE_RUNTIMES']:
+                runtimes = defines['LLVM_ENABLE_RUNTIMES'].split(';')
+                if 'openmp' not in runtimes:
+                    runtimes.append('openmp')
+                defines['LLVM_ENABLE_RUNTIMES'] = ';'.join(runtimes)
+            else:
+                defines['LLVM_ENABLE_RUNTIMES'] = 'openmp'
+    
+    return defines
 
 def show_command(args, command):
     """
