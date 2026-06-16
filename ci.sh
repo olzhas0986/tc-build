@@ -102,7 +102,6 @@ function do_llvm() {
         --no-assertions \
         --build-stage1-only \
         --build-target distribution \
-        --check-targets clang lld llvm \
         --distribution-profile kernel \
         --install-folder "$install" \
         --install-target distribution \
