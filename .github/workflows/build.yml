@@ -19,7 +19,6 @@ jobs:
 
     - name: Build LLVM
       run: |
-        export USE_CCACHE=1
         bash ci.sh llvm
 
     - name: Upload Finished Toolchain
