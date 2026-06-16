@@ -99,11 +99,11 @@ function do_llvm() {
     [[ -n ${GITHUB_ACTIONS:-} ]] && extra_args+=(--no-ccache)
 
     "$base"/build-llvm.py \
-        --assertions \
+        --no-assertions \
         --build-stage1-only \
         --build-target distribution \
         --check-targets clang lld llvm \
-        --distribution-profile rust \
+        --distribution-profile kernel \
         --install-folder "$install" \
         --install-target distribution \
         --projects clang lld \
@@ -111,7 +111,9 @@ function do_llvm() {
         --ref release/22.x \
         --shallow-clone \
         --show-build-commands \
-        --targets X86 \
+        --targets AArch64 ARM BPF \
+        --multicall \
+        -D CMAKE_INSTALL_DO_STRIP=ON LLVM_ENABLE_ZSTD=ON LLVM_ENABLE_PLUGINS=OFF LLVM_EXPORT_SYMBOLS_FOR_PLUGINS=OFF \
         "${extra_args[@]}"
 }
 
