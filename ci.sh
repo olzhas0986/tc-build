@@ -108,12 +108,12 @@ function do_llvm() {
         --install-target distribution \
         --projects clang lld \
         --quiet-cmake \
-        --ref release/22.x \
+        --ref release/23.x \
         --shallow-clone \
         --show-build-commands \
         --targets AArch64 ARM BPF \
         --multicall \
-        -D CMAKE_INSTALL_DO_STRIP=ON LLVM_ENABLE_ZSTD=ON LLVM_ENABLE_PLUGINS=OFF LLVM_EXPORT_SYMBOLS_FOR_PLUGINS=OFF \
+        -D CMAKE_INSTALL_DO_STRIP=ON LLVM_ENABLE_ZSTD=ON LLVM_ENABLE_PLUGINS=OFF LLVM_INCLUDE_TESTS=OFF LLVM_INCLUDE_EXAMPLES=OFF LLVM_INCLUDE_BENCHMARKS=OFF \
         "${extra_args[@]}"
 }
 
