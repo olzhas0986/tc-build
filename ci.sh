@@ -108,7 +108,7 @@ function do_llvm() {
         --install-target distribution \
         --projects clang lld \
         --quiet-cmake \
-        --ref release/23.x \
+        --ref main \
         --shallow-clone \
         --show-build-commands \
         --targets AArch64 ARM BPF \
